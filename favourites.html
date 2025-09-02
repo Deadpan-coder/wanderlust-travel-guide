@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Favourite Places - Wanderlust</title>
+  <link rel="stylesheet" href="mystyle.css">
+  <style>
+    .fav-card {
+      background-color: #222;
+      padding: 12px;
+      border-radius: 10px;
+      color: white;
+      margin-bottom: 15px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    }
+    .delete-btn {
+      background-color: #e74c3c;
+      color: white;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <center>
+      <h1 style="color:#DFFF00; background: linear-gradient(to right,#33ccff 0%, #cc00ff 100%);">
+        ⭐ My Favourite Places
+      </h1>
+    </center>
+    <nav>
+      <ul>
+        <li><a href="homepage.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="dest.html">Destinations</a></li>
+        <li><a href="fooddrink.html">Food & Drink</a></li>
+        <li><a href="accommodation.html">Accommodation</a></li>
+        <li><a href="accommodationtips.html">Tips for Accommodation</a></li>
+        <li><a href="favourites.html">Favourites</a></li>
+        <li><a href="contactandhelp.html">Contact</a></li>
+        <li><a href="submissions.html">Submissions</a></li> 
+      </ul>
+    </nav>
+  </header>
+
+  <section id="favourites">
+    <h2 style="color:yellow; text-align:center;">Your Starred Destinations</h2>
+    <div id="favList" class="destination-grid"></div>
+  </section>
+
+  <script>
+    async function loadFavourites() {
+      try {
+        const res = await fetch('http://localhost:3000/favourites');
+        const data = await res.json();
+        const list = document.getElementById("favList");
+        list.innerHTML = "";
+
+        if (data.length === 0) {
+          list.innerHTML = "<p style='color:white;'>You haven't starred any place yet.</p>";
+          return;
+        }
+
+        data.forEach(place => {
+          const card = document.createElement("div");
+          card.className = "fav-card";
+          card.innerHTML = `
+            <h3>📍 ${place.name}</h3>
+            <p>${place.description}</p>
+          `;
+
+          const delBtn = document.createElement("button");
+          delBtn.textContent = "🗑️ Delete";
+          delBtn.className = "delete-btn";
+
+          delBtn.onclick = async () => {
+            const confirmed = confirm(`Delete "${place.name}" from favourites?`);
+            if (!confirmed) return;
+
+            try {
+              const delRes = await fetch(`http://localhost:3000/favourites/${place._id}`, {
+                method: 'DELETE'
+              });
+              const result = await delRes.json();
+              if (result.success) {
+                alert("🗑️ Removed from favourites.");
+                loadFavourites();
+              } else {
+                alert("❌ Failed to delete.");
+              }
+            } catch (err) {
+              console.error(err);
+              alert("🚫 Server error during deletion.");
+            }
+          };
+
+          card.appendChild(delBtn);
+          list.appendChild(card);
+        });
+      } catch (err) {
+        console.error("Failed to load favourites", err);
+        alert("Error loading your favourite places.");
+      }
+    }
+
+    window.onload = loadFavourites;
+  </script>
+
+  <footer>
+    <p>&copy; 2023 Wanderlust Travel Guide. All rights reserved.</p>
+  </footer>
+</body>
+</html>

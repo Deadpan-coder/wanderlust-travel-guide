@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Destinations</title>
+  <link rel="stylesheet" href="mystyle.css">
+</head>
+<body>
+  <header>
+    <center>
+      <h1 style="color:#DFFF00;background:linear-gradient(to right,#33ccff 0%, #cc00ff 100%)">
+        WANDERLUST TRAVEL GUIDE
+      </h1>
+    </center>
+    <nav>
+      <ul>
+        <li><a href="homepage.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="dest.html">Destinations</a></li>
+        <li><a href="fooddrink.html">Food & Drink</a></li>
+        <li><a href="accommodation.html">Accommodation</a></li>
+        <li><a href="accommodationtips.html">Tips for Accommodation</a></li>
+        <li><a href="favourites.html">Favourites</a></li>
+        <li><a href="contactandhelp.html">Contact</a></li>
+        <li><a href="submissions.html">Submissions</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="destinations">
+    <h2>Discover Awesome Destinations</h2>
+    <p>Embark on a virtual journey to breathtaking destinations across the globe. From iconic landmarks to hidden gems, we have curated the best virtual experiences for you to explore.</p>
+
+    <div class="destination-grid">
+      
+      <div class="destination-card">
+        <img src="./images/hawaii.jpg" alt="Hawaii">
+        <h3>HAWAII</h3>
+        <p>Hawaii, the tropical paradise of the Pacific, offers a mesmerizing blend of stunning landscapes, rich culture, and unforgettable experiences. From its pristine beaches with turquoise waters to lush rainforests and volcanic wonders, a trip to Hawaii promises an adventure like no other.
+
+Upon arrival, you are greeted by the warm aloha spirit of the locals, known for their hospitality and laid-back attitude. The first stop on your journey is Waikiki Beach in Honolulu, Oahu. Here, you immerse yourself in the vibrant atmosphere, enjoying the sun-kissed shores, surfing lessons, and the breathtaking views of Diamond Head, a dormant volcanic crater.</p>
+        <button class="fav-btn" data-name="Hawaii" data-description="Tropical paradise with lush rainforests and beaches">⭐ Save to Favourites</button>
+      </div>
+
+      <div class="destination-card">
+        <img src="./images/paris.jpg" alt="Paris">
+        <h3>PARIS</h3>
+        <p>Paris, the enchanting "City of Lights," is an unforgettable destination that promises a mesmerizing experience for every traveler. As you step onto the cobbled streets, you'll be greeted by the breathtaking sight of iconic landmarks and the alluring aroma of freshly baked pastries.
+During your trip to Paris, don't miss the chance to ascend the iconic Eiffel Tower. The view from its lofty heights offers a captivating panorama of the city's beauty. Stroll along the Seine River, where you can witness the romance of Paris unfold as you pass charming bridges and riverside cafés.</p>
+        <button class="fav-btn" data-name="Paris" data-description="City of Lights and romance">⭐ Save to Favourites</button>
+      </div>
+
+      <div class="destination-card">
+        <img src="./images/ny.jpg" alt="New York City">
+        <h3>NEW YORK CITY</h3>
+        <p>"Embarking on a trip to New York City is an adventure like no other. The moment you step foot in the city, you're greeted by the electrifying atmosphere of Times Square, where colorful billboards and bustling crowds set the stage for an incredible journey.
+Exploring the city's neighborhoods, each with its unique charm, reveals a tapestry of cultures and traditions. From the art galleries of Chelsea to the historic architecture of Greenwich Village, every corner has a story to tell.</p>
+        <button class="fav-btn" data-name="New York City" data-description="The city that never sleeps">⭐ Save to Favourites</button>
+      </div>
+
+      <div class="destination-card">
+        <img src="./images/sydney.jpg" alt="Sydney">
+        <h3>SYDNEY</h3>
+        <p>Sydney, Australia's stunning harbor city, is a perfect fusion of natural beauty and modern charm. From the world-famous Sydney Opera House and Harbour Bridge to golden beaches like Bondi and Manly, the city offers unforgettable coastal vibes. Explore vibrant neighborhoods, sail across sparkling waters, or watch the sun set behind the skyline. Sydney is not just a destination — it’s an experience of sunshine, culture, and adventure.</p>
+        <button class="fav-btn" data-name="Sydney" data-description="Harbour city with Opera House and beaches">⭐ Save to Favourites</button>
+      </div>
+
+      <div class="destination-card">
+        <img src="./images/dubai.jpg" alt="Dubai">
+        <h3>DUBAI</h3>
+        <p>"Dubai, the glittering gem of the United Arab Emirates, promises an unforgettable travel experience that combines modern luxury with rich cultural heritage. From awe-inspiring skyscrapers to golden deserts and pristine beaches, Dubai offers something for every traveler.
+
+Must-see landmarks:
+Burj Khalifa: The tallest building in the world, offering breathtaking views from its observation decks.
+The Dubai Mall: A shopper's paradise with numerous shops, restaurants, and entertainment options.
+Dubai Fountain: Witness the enchanting water and light show set to music, right outside the Burj Khalifa.
+Dubai Marina: A vibrant waterfront district, perfect for leisurely walks and dining by the water.
+Palm Jumeirah: An iconic man-made island shaped like a palm tree, home to luxurious resorts and hotels.</p>
+        <button class="fav-btn" data-name="Dubai" data-description="Luxury city with Burj Khalifa and desert adventures">⭐ Save to Favourites</button>
+      </div>
+
+      <div class="destination-card">
+        <img src="./images/maldives.jpg" alt="Maldives">
+        <h3>MALDIVES</h3>
+        <p>The Maldives, a tropical paradise nestled in the Indian Ocean, offers an unforgettable vacation experience. With its crystal-clear turquoise waters, powdery white sand beaches, and vibrant marine life, the Maldives is a dream destination for travelers seeking a slice of heaven.Upon arrival, visitors are greeted with warm hospitality and breathtaking views. The overwater bungalows, perched above the lagoon, provide a luxurious and serene escape. Imagine waking up to the gentle sound of waves and stepping directly into the ocean from your private deck. </p>
+        <button class="fav-btn" data-name="Maldives" data-description="Tropical escape with overwater bungalows">⭐ Save to Favourites</button>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('.fav-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const name = btn.dataset.name;
+        const description = btn.dataset.description;
+
+        try {
+          const res = await fetch('http://localhost:3000/favourites', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, description })
+          });
+
+          const result = await res.json();
+          if (result.success) {
+            alert("✅ Added to Favourites!");
+          } else {
+            alert("❌ Failed to save.");
+          }
+        } catch (err) {
+          alert("🚫 Server error.");
+          console.error(err);
+        }
+      });
+    });
+  </script>
+
+  <footer>
+    <p>&copy; 2023 Wanderlust Travel Guide. All rights reserved.</p>
+  </footer>
+</body>
+</html>
